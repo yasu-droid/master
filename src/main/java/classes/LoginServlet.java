@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+//ログイン画面でpost送信されたとき、以下を実行
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -25,20 +26,26 @@ public class LoginServlet extends HttpServlet {
 		super();
 	}
 
+	//post送信の時、以下を実行
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		//ログインIDの取得//
+		//セッションがある場合、セッションを取得false を指定することで、
+		//もしセッションが存在しない場合には新たにセッションを作成しない//
 		HttpSession session = request.getSession(false);
 		//セッションが存在する場合は破棄
 		if (session != null) {
 			session.invalidate();
 		}
 
+		//レスポンスの形式は、htmlのtext形式（文字コード:UTF-8）
 		response.setContentType("text/html;charset=UTF-8");
+		//文字出力用のストリームの取得
 		PrintWriter out = response.getWriter();
 
+		//入力されたログインIDをセット
 		String id = request.getParameter("loginID");
+		//入力されたパスワードをセット
 		String pw = request.getParameter("loginPw");
 
 		// PostgreSQL DB接続情報
@@ -46,18 +53,25 @@ public class LoginServlet extends HttpServlet {
 		String dbUserName = "postgres";
 		String dbPassword = "password";
 
+		//connectionメソッドの宣言（DBとの接続するメソッド）
 		Connection conn = null;
+		//PreparedStatementオブジェクトの宣言、SQL文を宣言するオブジェクト
 		PreparedStatement stmt = null;
+		//検索結果のセット
 		ResultSet rs = null;
-		try {
-		    Class.forName("org.postgresql.Driver");
-		    out.println("JDBC Driver ロード成功！");
-		} catch (ClassNotFoundException e) {
-		    e.printStackTrace();
-		    out.println("JDBC Driver が見つかりません！");
-		}
+		//try-catch構文で、jcbcドライバーの読み込みが成功しているか確認
 		try {
 			// JDBCドライバをロード
+			Class.forName("org.postgresql.Driver");
+			//ドライバの読み込み成功時
+			out.println("JDBC Driver ロード成功！");
+		} catch (ClassNotFoundException e) {
+			//読み込み失敗時、読み込み失敗でエラーを受け取った時、
+			e.printStackTrace();
+			out.println("JDBC Driver が見つかりません！");
+		}
+		try {
+
 			Class.forName("org.postgresql.Driver");
 
 			//セッションを新規で作成
@@ -68,11 +82,15 @@ public class LoginServlet extends HttpServlet {
 			// DB接続
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
-			// SQL文
+			// SQL文の宣言
 			String sql = "SELECT * FROM users WHERE loginId = ? AND loginPw = ?";
+			//上記SQL分の準備
 			stmt = conn.prepareStatement(sql);
+			//SQL分の１つ目の？に入力したloginIDをセット
 			stmt.setString(1, id);
+			//SQL分の２つ目の？に入力したパスワードをセット
 			stmt.setString(2, pw);
+			//SQL分の実行
 			rs = stmt.executeQuery();
 
 			ServletContext sc = this.getServletContext();
