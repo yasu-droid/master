@@ -32,9 +32,10 @@ if (session != null) {
 		</div>
 		<!-- アコーディオンを開いた時のメニュー -->
 		<ul class="menu_container">
-			<li>timer</li>
-			<li>report</li>
-			<li>logout</li>
+			<li><a href = "timer.jsp">timer</a></li>
+			<li><a href = "report.jsp">report</a></li>
+			<li><a href = "login.jsp">logout</a></li>
+
 		</ul>
 	</nav>
 	<script src="js/headerMenu.js" charset="utf-8" defer></script>

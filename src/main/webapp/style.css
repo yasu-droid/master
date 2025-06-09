@@ -3,10 +3,14 @@
 
 /* ---------- ヘッダー関連 ---------- */
 
-/*
+/* タイトル*/
 .title {
-	margin: 0 auto; /* タイトル中央寄せ（コメントアウト中） */
+	text-align: center;
+	font-size: 30px;
+	margin: 0;
+}
 
+/*メニュー　アコーディオン*/
 .menu_outer {
 	width: fit-content;
 	height: fit-content;
@@ -84,6 +88,7 @@
 	padding-left: 0px;
 	cursor: pointer;
 	list-style: none;
+	text-align: center;
 }
 
 .menu_container li:hover {
@@ -91,6 +96,9 @@
 	color: white;
 }
 
+a {
+	text-decoration: none;
+}
 
 /* ---------- ログイン画面 ---------- */
 
@@ -123,6 +131,7 @@
 /* ID入力欄 */
 #loginID {
 	margin: 1vh;
+	margin-left: 0;
 	/* 上下のマージン */
 	border-radius: 7px;
 	/* 角丸 */

@@ -7,6 +7,7 @@
 <head>
 <meta charset="utf-8">
 <title>report</title>
+<link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.2.0/chart.min.js"
@@ -18,7 +19,7 @@
 <body>
 
 	<jsp:include page="header.jsp">
-		<jsp:param name="title" value="timer" />
+		<jsp:param name="title" value="report" />
 	</jsp:include>
 	<div style="width: 400px">
 		<canvas id="mychart-bar"></canvas>
