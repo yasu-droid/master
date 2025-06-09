@@ -1,33 +1,17 @@
 @charset "UTF-8";
-/*ヘッダー*/
-/*menu_outer {
-=======
-/* ヘッダー */
+/* 文字コードをUTF-8に設定 */
 
-/*.title {
-	margin: 0 auto;
-	 中央寄せ 
-=======
+/* ---------- ヘッダー関連 ---------- */
+
+/*
 .title {
->>>>>>> branch 'master' of https://github.com/yasu-droid/practice0427.git
-	position: absolute;
-<<<<<<< HEAD
-	 中央に固定表示させるために使う 
-=======
->>>>>>> branch 'master' of https://github.com/yasu-droid/practice0427.git
-	left: 50%;
-	transform: translateX(-50%);
-	font-size: 24px;
-	font-weight: bold;
-	color: white;
-	z-index: 2; /* タイトルを前面に */
+	margin: 0 auto; /* タイトル中央寄せ（コメントアウト中） */
 
-
-/*	 タブフォーカス時のスタイル */
-/*	&:focus-visible {*/
-/*		outline: dashed #00a5a0;*/
-/*	}*/
-/*}*/
+.menu_outer {
+	width: fit-content;
+	height: fit-content;
+	overflow: hidden;
+}
 
 .menu_index {
 	width: 250px;
@@ -82,31 +66,24 @@
 	transform: rotate(0deg);
 }
 
-ul {
-	list-style: none;
-	/* ul, ol, dl のマーカーを非表示にする */
-	margin: 0;
-	padding: 0;
-}
-
-.menu_outer {
-	width: fit-content;
-	height: fit-content;
-	overflow: hidden;
-}
-
 .menu_container {
+
 	width: 250px;
 	border: solid 1px;
 	border-top: none;
 	background-color: lightcyan;
 	position: relative;
 	z-index: 1;
+	opacity: 0;
+	transition: .4s;
+	padding-left: 0;
+	margin: 0;
 }
 
 .menu_container li {
-	padding: 10px;
+	padding-left: 0px;
 	cursor: pointer;
+	list-style: none;
 }
 
 .menu_container li:hover {
@@ -114,62 +91,99 @@ ul {
 	color: white;
 }
 
-/*ログイン画面*/
 
+/* ---------- ログイン画面 ---------- */
+
+/* ログインボックス全体 */
 #loginBox {
 	background-color: white;
+	/* 背景を白に */
 	width: 210px;
+	/* 幅 */
 	height: 220px;
+	/* 高さ */
 	margin: 0 auto;
+	/* 中央寄せ */
 	padding: 10px;
+	/* 内側の余白 */
 	border-radius: 7px;
+	/* 角を丸くする */
 }
 
+/* ログインタイトル */
 #loginTitle {
 	font-size: 30px;
+	/* フォントサイズ */
 	font-weight: bold;
+	/* 太字 */
 	margin-top: 0.5vh;
+	/* 上の余白（画面高さに対する割合） */
 }
 
+/* ID入力欄 */
 #loginID {
 	margin: 1vh;
+	/* 上下のマージン */
 	border-radius: 7px;
+	/* 角丸 */
 	height: 20px;
+	/* 高さ */
 	border: solid 2px lightgray;
+	/* 枠線 */
 }
 
+/* パスワード入力欄 */
 #loginPw {
 	margin: 0.1vh;
+	/* わずかな上下マージン */
 	border-radius: 7px;
+	/* 角丸 */
 	height: 20px;
+	/* 高さ */
 	border: solid 2px lightgray;
+	/* 枠線 */
 }
 
+/* ログインボタン */
 #loginBtn {
 	background-color: #4a90e2;
+	/* 青系背景色 */
 	color: white;
+	/* 文字色 */
 	width: 180px;
+	/* 幅 */
 	height: 25px;
+	/* 高さ */
 	border-radius: 7px;
+	/* 角丸 */
 	border: none;
+	/* 枠線なし */
 }
 
+/* エラーメッセージ用 */
 .errorMes {
 	color: red;
+	/* 文字色を赤に */
 }
 
+/* ---------- タイマー画面 ---------- */
 
-/*タイマー画面*/
+/* タイマー画面全体 */
 .timerBox {
 	font-family: BIZ UDP;
-
+	/* フォント指定（BIZ UDP） */
 	text-align: center;
+	/* 中央寄せ */
 }
 
+/* スタートボタン */
 .startBtn {
 	margin-top: 1vh;
+	/* 上の余白 */
 }
 
+/* タイマー部分 */
 .timer {
 	margin-top: 2vh;
+	/* 上の余白 */
 }
