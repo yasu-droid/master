@@ -20,24 +20,26 @@ if (session != null) {
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- titleがセットされていればタイトル名、セットされていなければタイトル未設定 -->
+	<!-- titleがセットされていればタイトル名、セットされていなければタイトル未設定 -->
 	<p class="title"><%=title != null ? title : "タイトル未設定"%></p>
 	<!-- アコーディオンメニュー -->
 	<nav class="menu_outer">
 		<div class="menu_index">
-		　　<!-- 取得したnameを画面に表示 なければゲストを表示-->
+			<!-- 取得したnameを画面に表示 なければゲストを表示-->
 			<%=name != null ? name : "ゲスト"%>
 			<!-- nameを押したとき、アコーディオンを開閉する -->
 			<div class="toggle_btn"></div>
 		</div>
 		<!-- アコーディオンを開いた時のメニュー -->
 		<ul class="menu_container">
-			<li>timer</li>
-			<li>report</li>
-			<li>logout</li>
+			<li><a href = "timer.jsp">timer</a></li>
+			<li><a href = "report.jsp">report</a></li>
+			<li><a href = "login.jsp">logout</a></li>
+
 		</ul>
 	</nav>
-	<script src="js/headerMenu.js" charset="utf-8"></script>
+	<script src="js/headerMenu.js" charset="utf-8" defer></script>
+
 </body>
 
 </html>

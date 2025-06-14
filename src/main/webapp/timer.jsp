@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSPページ</title>
+<title>タイマー</title>
 <link rel="stylesheet" href="style.css">
 <script src="js/countdown_time.js"></script>
 </head>

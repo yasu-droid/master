@@ -15,9 +15,8 @@ if (durationStr == null || startStr == null || endStr == null || loginid == null
 }
 
 int duration = Integer.parseInt(durationStr);
-String formattedStart = startStr.replace("T", " ").substring(0, 19);
-String formattedEnd = endStr.replace("T", " ").substring(0, 19);
-String formattedDate = formattedStart.substring(0, 10); // yyyy-MM-dd
+String formattedDate = startStr.substring(0, 10); // 日付部分だけ切り出す
+
 
 Connection conn = null;
 PreparedStatement stmt = null;
@@ -34,8 +33,8 @@ try {
     stmt = conn.prepareStatement(sql);
     stmt.setInt(1, duration);
     stmt.setDate(2, java.sql.Date.valueOf(formattedDate));
-    stmt.setTimestamp(3, Timestamp.valueOf(formattedStart));
-    stmt.setTimestamp(4, Timestamp.valueOf(formattedEnd));
+    stmt.setTimestamp(3, Timestamp.valueOf(startStr));
+    stmt.setTimestamp(4, Timestamp.valueOf(endStr));
     stmt.setString(5,loginid);
     stmt.setString(6,details);
     stmt.executeUpdate();
