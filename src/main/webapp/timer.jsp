@@ -17,7 +17,7 @@
 		<jsp:param name="title" value="timer" />
 	</jsp:include>
 	<!-- HTMLコメント -->
-	<!--  <h2>タイマー1</h2> -->
+	<!--  <h2>タイマー2</h2> -->
 
 	<form>
 		<div class="timer">
