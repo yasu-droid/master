@@ -33,7 +33,6 @@ public class ReportServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(false);
 		if (session == null || session.getAttribute("loginid") == null) {
-			out.println("ログインしていません。");
 			return;
 		}
 
@@ -52,7 +51,7 @@ public class ReportServlet extends HttpServlet {
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
 			String sql = "SELECT loginid, details, sum(duration_minutes) as totalWorkTime " +
-					"FROM timer_log WHERE loginId = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' " +
+					"FROM timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' " +
 					"GROUP BY loginid, details";
 
 			stmt = conn.prepareStatement(sql);
@@ -61,29 +60,19 @@ public class ReportServlet extends HttpServlet {
 
 			ArrayList<Integer> sum_list = new ArrayList<>();
 	
-			//			out.println("<!DOCTYPE html>");
-			//			out.println("<html>");
-			//			out.println("<head><meta charset='UTF-8'><title>作業時間レポート</title></head>");
-			//			out.println("<body>");
-			//			out.println("<h2>過去7日間の作業時間</h2>");
-			//			out.println("<ul>");
-
-			//			int index = 1;
 			while (rs.next()) {
 				int totalWorkTime = rs.getInt("totalWorkTime");
 				sum_list.add(totalWorkTime);
-
-				//				out.println("<li>作業 " + index + ": " + totalWorkTime + " 分</li>");
-				//				index++;
 			}
-			//			out.println("</ul>");
-			//
-			//			out.println("<p>合計要素数: " + sum_list.size() + "</p>");
-			//			out.println("<p>配列全体: " + sum_list.toString() + "</p>");
-			//
-			//			out.println("</body></html>");
+			
+
+
 			request.setAttribute("sum_list", sum_list);
 			request.getRequestDispatcher("/report.jsp").forward(request,response);
+		
+//		String text = "test";
+//		request.setAttribute("text",text);
+//		request.getRequestDispatcher("/report.jsp").forward(request,response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			out.println("<p>データベースエラー: " + e.getMessage() + "</p>");
