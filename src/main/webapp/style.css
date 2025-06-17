@@ -16,9 +16,9 @@
 	height: fit-content;
 	overflow: hidden;
 }
-
+/*メニュー　アコーディオンの外見*/
 .menu_index {
-	width: 250px;
+	width: 70px;
 	padding: 10px;
 	display: flex;
 	justify-content: space-between;
@@ -72,7 +72,7 @@
 
 .menu_container {
 
-	width: 250px;
+	width: 90px;
 	border: solid 1px;
 	border-top: none;
 	background-color: lightcyan;
@@ -85,7 +85,10 @@
 }
 
 .menu_container li {
+	width: 90px;
+	padding: 10px;
 	padding-left: 0px;
+	padding-right: 0px;
 	cursor: pointer;
 	list-style: none;
 	text-align: center;
