@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 //ログイン画面でpost送信されたとき、以下を実行
-@WebServlet("/login")
+@WebServlet("/auth")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 
 		//レスポンスの形式は、htmlのtext形式（文字コード:UTF-8）
 		response.setContentType("text/html;charset=UTF-8");
-		//文字出力用のストリームの取得
+		//文字出力用のストリームの取得	
 		PrintWriter out = response.getWriter();
 
 		//入力されたログインIDをセット

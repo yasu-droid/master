@@ -18,11 +18,24 @@
 		<jsp:param name="title" value="report" />
 	</jsp:include>
 
+	<form action="report" method="post">
+		<p>
+			<input type="hidden" name="loginId" id="hiddenLoginid"
+				value="${loginid}">
+		</p>
+		<p>
+			<!-- ログインIDを送信 -->
+			<input type="submit" value="週生成" id="createBtn">
+		</p>
+	</form>
+
+
 	<div style="width: 400px; margin: 0 auto;">
 		<canvas id="mychart-bar"></canvas>
 	</div>
-	<p>こんにちは、${sum_list} さん</p>
+
 	<!--
+		<p>こんにちは、${loginid} さん</p>
 	サーブレットから受け取る
 	List<Integer> sumList = (List<Integer>) request.getAttribute("sum_list");
 	if (sumList == null) { // ★ null セーフティ
@@ -31,6 +44,7 @@
 	%>
 	-->
 
+	<script src="script.js"></script>
 
 </body>
 </html>

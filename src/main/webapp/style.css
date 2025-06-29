@@ -16,6 +16,7 @@
 	height: fit-content;
 	overflow: hidden;
 }
+
 /*メニュー　アコーディオンの外見*/
 .menu_index {
 	width: 70px;
@@ -170,6 +171,8 @@ a {
 	/* 角丸 */
 	border: none;
 	/* 枠線なし */
+
+	cursor: pointer;
 }
 
 /* エラーメッセージ用 */

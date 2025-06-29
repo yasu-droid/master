@@ -13,7 +13,7 @@
 	<div id="loginBox">
 		<div id="loginTitle">Login</div>
 		<!-- 入力内容をpost送信 -->
-		<form action="login" method="post">
+		<form action="auth" method="post">
 			<p id="loginText">
 			<!-- ログインIDの入力 -->
 				<input type="text" id="loginID" name="loginID" placeholder="loginID" required>

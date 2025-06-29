@@ -7,7 +7,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +24,7 @@ public class ReportServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
@@ -37,7 +36,7 @@ public class ReportServlet extends HttpServlet {
 		}
 
 		String id = (String) session.getAttribute("loginid");
-
+		//		System.out.println(id);
 		String dbUrl = "jdbc:postgresql://localhost:5432/time_data";
 		String dbUserName = "postgres";
 		String dbPassword = "password";
@@ -50,29 +49,33 @@ public class ReportServlet extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
-			String sql = "SELECT loginid, details, sum(duration_minutes) as totalWorkTime " +
-					"FROM timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' " +
-					"GROUP BY loginid, details";
-
+			String sql = "SELECT loginid,details FROM timer_log where loginid = ? GROUP BY loginid,details";
+			//			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime " +
+			//					"FROM timer_log WHERE loginid = ?";
+			//
+			//			String sql = "SELECT loginid, details, sum(duration_minutes) as totalWorkTime " +
+			//					"FROM timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' " +
+			//					"GROUP BY loginid, details";
+			//			
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, id);
 			rs = stmt.executeQuery();
+			//			System.out.println(id);
+			//			ArrayList<Integer> sum_list = new ArrayList<>();
 
-			ArrayList<Integer> sum_list = new ArrayList<>();
-	
 			while (rs.next()) {
-				int totalWorkTime = rs.getInt("totalWorkTime");
-				sum_list.add(totalWorkTime);
+			    String loginidResult = rs.getString("loginid");
+			    String detailsResult = rs.getString("details");
+			    System.out.println("loginid: " + loginidResult + ", details: " + detailsResult);
 			}
-			
 
+			//			System.out.println(sum_list);
+			//			request.setAttribute("sum_list", sum_list);
+			request.getRequestDispatcher("/report.jsp").forward(request, response);
 
-			request.setAttribute("sum_list", sum_list);
-			request.getRequestDispatcher("/report.jsp").forward(request,response);
-		
-//		String text = "test";
-//		request.setAttribute("text",text);
-//		request.getRequestDispatcher("/report.jsp").forward(request,response);
+			//		String text = "test";
+			//		request.setAttribute("text",text);
+			//		request.getRequestDispatcher("/report.jsp").forward(request,response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			out.println("<p>データベースエラー: " + e.getMessage() + "</p>");
