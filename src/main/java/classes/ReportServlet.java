@@ -49,9 +49,8 @@ public class ReportServlet extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
-			String sql = "SELECT loginid,details FROM timer_log where loginid = ? GROUP BY loginid,details";
-			//			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime " +
-			//					"FROM timer_log WHERE loginid = ?";
+			//String sql = "SELECT loginid,details,duration_minutes FROM timer_log where loginid = ? GROUP BY loginid,details,duration_minutes";
+			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime ,details from timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' GROUP BY loginid,details";
 			//
 			//			String sql = "SELECT loginid, details, sum(duration_minutes) as totalWorkTime " +
 			//					"FROM timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' " +
@@ -64,9 +63,11 @@ public class ReportServlet extends HttpServlet {
 			//			ArrayList<Integer> sum_list = new ArrayList<>();
 
 			while (rs.next()) {
-			    String loginidResult = rs.getString("loginid");
-			    String detailsResult = rs.getString("details");
-			    System.out.println("loginid: " + loginidResult + ", details: " + detailsResult);
+				String loginidResult = rs.getString("loginid");
+				String detailsResult = rs.getString("details");
+				int totalResult = rs.getInt("totalWorkTime");
+				System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
+
 			}
 
 			//			System.out.println(sum_list);
