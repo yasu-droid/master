@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -49,34 +50,23 @@ public class ReportServlet extends HttpServlet {
 			Class.forName("org.postgresql.Driver");
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
-			//String sql = "SELECT loginid,details,duration_minutes FROM timer_log where loginid = ? GROUP BY loginid,details,duration_minutes";
 			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime ,details from timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' GROUP BY loginid,details";
-			//
-			//			String sql = "SELECT loginid, details, sum(duration_minutes) as totalWorkTime " +
-			//					"FROM timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' " +
-			//					"GROUP BY loginid, details";
-			//			
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			rs = stmt.executeQuery();
-			//			System.out.println(id);
+		
 			//			ArrayList<Integer> sum_list = new ArrayList<>();
-
+			ArrayList<String> detail_list = new ArrayList<>();
+			ArrayList<Integer> totaltime_list = new ArrayList<>();
+			
 			while (rs.next()) {
-				String loginidResult = rs.getString("loginid");
+				//String loginidResult = rs.getString("loginid");
 				String detailsResult = rs.getString("details");
 				int totalResult = rs.getInt("totalWorkTime");
-				System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
-
+				detail_list.add(detailsResult);
+				totaltime_list.add(totalResult);
+				//System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
 			}
 
-			//			System.out.println(sum_list);
-			//			request.setAttribute("sum_list", sum_list);
 			request.getRequestDispatcher("/report.jsp").forward(request, response);
 
-			//		String text = "test";
-			//		request.setAttribute("text",text);
-			//		request.getRequestDispatcher("/report.jsp").forward(request,response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			out.println("<p>データベースエラー: " + e.getMessage() + "</p>");
