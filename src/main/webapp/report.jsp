@@ -33,15 +33,7 @@
 	<div style="width: 400px; margin: 0 auto;">
 		<canvas id="mychart-bar"></canvas>
 	</div>
-	<%
-	for (int i = 0; i < detail_list.size(); i++) {
-	%>
-	<%
-	System.out.println(detail_list.get(i));
-	%>
-	<%
-	}
-	%>
+
 	<!--
 		<p>こんにちは、${loginid} さん</p>
 	サーブレットから受け取る

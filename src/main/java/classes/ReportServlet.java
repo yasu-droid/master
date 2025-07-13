@@ -51,18 +51,22 @@ public class ReportServlet extends HttpServlet {
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
 			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime ,details from timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' GROUP BY loginid,details";
-		
+
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, id);
+			rs = stmt.executeQuery();
+			
 			//			ArrayList<Integer> sum_list = new ArrayList<>();
 			ArrayList<String> detail_list = new ArrayList<>();
 			ArrayList<Integer> totaltime_list = new ArrayList<>();
-			
+
 			while (rs.next()) {
-				//String loginidResult = rs.getString("loginid");
+				String loginidResult = rs.getString("loginid");
 				String detailsResult = rs.getString("details");
 				int totalResult = rs.getInt("totalWorkTime");
 				detail_list.add(detailsResult);
 				totaltime_list.add(totalResult);
-				//System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
+				System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
 			}
 
 			request.getRequestDispatcher("/report.jsp").forward(request, response);
