@@ -51,7 +51,10 @@ public class ReportServlet extends HttpServlet {
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
 			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime ,details from timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' GROUP BY loginid,details";
-		rs = stmt.executeQuery();
+			stmt = conn.prepareStatement(sql);  // ← SQLを準備
+			stmt.setString(1, id);              // ← パラメータをバインド
+			rs = stmt.executeQuery();           // ← クエリを実行
+		
 			//			ArrayList<Integer> sum_list = new ArrayList<>();
 			ArrayList<String> detail_list = new ArrayList<>();
 			ArrayList<Integer> totaltime_list = new ArrayList<>();
