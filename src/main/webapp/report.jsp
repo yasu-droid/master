@@ -29,6 +29,9 @@
 		</p>
 	</form>
 
+	<%
+	   System.out.println("デバッグ：JSPが呼ばれました");
+	%>
 
 	<div style="width: 400px; margin: 0 auto;">
 		<canvas id="mychart-bar"></canvas>
