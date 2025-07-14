@@ -30,9 +30,13 @@
 	</form>
 
 	<%
-	   System.out.println("デバッグ：JSPが呼ばれました");
+		ArrayList<String> detail_list = (ArrayList<String>) request.getAttribute("detail_list");
 	%>
-
+	<%
+		for (int i = 0; i < detail_list.size(); i++) {
+    System.out.println("detail[" + i + "]: " + detail_list.get(i));
+		}
+	%>
 	<div style="width: 400px; margin: 0 auto;">
 		<canvas id="mychart-bar"></canvas>
 	</div>
