@@ -16,12 +16,21 @@
     <jsp:param name="title" value="report" />
   </jsp:include>
 
-  <form action="report" method="post">
+  <form action="report_week" method="post">
     <p>
-      <input type="hidden" name="loginId" id="hiddenLoginid" value="${loginid}">
+      <input type="hidden" name="loginId_week" id="hiddenLoginid_week" value="${loginid_week}">
     </p>
     <p>
-      <input type="submit" value="週生成" id="createBtn">
+      <input type="submit" value="週生成" id="createBtn_week">
+    </p>
+  </form>
+
+  <form action="report_month" method="post">
+    <p>
+      <input type="hidden" name="loginId_month" id="hiddenLoginid_month" value="${loginid_month}">
+    </p>
+    <p>
+      <input type="submit" value="月生成" id="createBtn_month">
     </p>
   </form>
 
