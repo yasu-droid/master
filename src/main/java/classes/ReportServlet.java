@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/report")
-public class ReportServlet extends HttpServlet {
+@WebServlet("/report_week")
+public class ReportWeekServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public ReportServlet() {
