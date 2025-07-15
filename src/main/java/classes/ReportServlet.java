@@ -20,7 +20,7 @@ import javax.servlet.http.HttpSession;
 public class ReportWeekServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ReportServlet() {
+	public ReportWeekServlet() {
 		super();
 	}
 
