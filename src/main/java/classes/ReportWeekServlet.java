@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/report")
-public class ReportServlet extends HttpServlet {
+@WebServlet("/report_week")
+public class ReportWeekServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public ReportServlet() {
+	public ReportWeekServlet() {
 		super();
 	}
 
@@ -51,25 +51,25 @@ public class ReportServlet extends HttpServlet {
 			conn = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
 
 			String sql = "SELECT loginid, sum(duration_minutes) as totalWorkTime ,details from timer_log WHERE loginid = ? AND log_date >= CURRENT_DATE - INTERVAL '6 days' GROUP BY loginid,details";
-
-			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
-			rs = stmt.executeQuery();
-			
+			stmt = conn.prepareStatement(sql);  // ← SQLを準備
+			stmt.setString(1, id);              // ← パラメータをバインド
+			rs = stmt.executeQuery();           // ← クエリを実行
+		
 			//			ArrayList<Integer> sum_list = new ArrayList<>();
 			ArrayList<String> detail_list = new ArrayList<>();
 			ArrayList<Integer> totaltime_list = new ArrayList<>();
-
+			
 			while (rs.next()) {
-				String loginidResult = rs.getString("loginid");
+				//String loginidResult = rs.getString("loginid");
 				String detailsResult = rs.getString("details");
 				int totalResult = rs.getInt("totalWorkTime");
 				detail_list.add(detailsResult);
 				totaltime_list.add(totalResult);
-				System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
+				//System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
 			}
-
-			request.getRequestDispatcher("/report.jsp").forward(request, response);
+request.setAttribute("detail_list", detail_list);
+request.setAttribute("totaltime_list", totaltime_list);
+		request.getRequestDispatcher("/report.jsp").forward(request, response);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
