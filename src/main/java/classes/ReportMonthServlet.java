@@ -67,8 +67,8 @@ public class ReportMonthServlet extends HttpServlet {
 				totaltime_list.add(totalResult);
 				//System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
 			}
-request.setAttribute("detail_list", detail_list);
-request.setAttribute("totaltime_list", totaltime_list);
+		request.setAttribute("detail_list", detail_list);
+		request.setAttribute("totaltime_list", totaltime_list);
 		request.getRequestDispatcher("/report.jsp").forward(request, response);
 
 		} catch (SQLException e) {
