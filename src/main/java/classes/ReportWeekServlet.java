@@ -65,7 +65,7 @@ public class ReportWeekServlet extends HttpServlet {
 				int totalResult = rs.getInt("totalWorkTime");
 				detail_list.add(detailsResult);
 				totaltime_list.add(totalResult);
-				//System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
+					//System.out.println("loginid: " + loginidResult + ",details: " + detailsResult + ",minutes:" + totalResult);
 			}
 request.setAttribute("detail_list", detail_list);
 request.setAttribute("totaltime_list", totaltime_list);
