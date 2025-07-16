@@ -34,26 +34,15 @@
     </p>
   </form>
 
-<<<<<<< HEAD
+
 	<div style="width: 400px; margin: 0 auto;">
 		<canvas id="mychart-bar"></canvas>
 	</div>
 
-	<!--
-		<p>こんにちは、${loginid} さん</p>
-	サーブレットから受け取る
-	List<Integer> sumList = (List<Integer>) request.getAttribute("sum_list");
-	if (sumList == null) { // ★ null セーフティ
-		sumList = new ArrayList<>();
-	}}
-	%>
-	-->
-=======
   <%
     // サーブレットから受け取ったリストを取得
     List<String> details = (List<String>) request.getAttribute("detail_list");
     List<Integer> totals = (List<Integer>) request.getAttribute("totaltime_list");
->>>>>>> refs/remotes/origin/yasuda_servlet_test
 
     if (details == null) {
       details = new ArrayList<>();
