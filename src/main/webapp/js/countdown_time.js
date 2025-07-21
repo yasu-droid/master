@@ -1,4 +1,12 @@
 function startTimer() {
+	const detailInput = document.getElementById("details");
+	const task = detailInput.value.trim();
+
+	if (task === "") {
+		alert("作業内容を入力してください。");
+		detailInput.focus();
+		return;
+	}
 	const select = document.getElementById("minutes");
 	let seconds = parseInt(select.value) * 60;
 	const display = document.getElementById("timer");
